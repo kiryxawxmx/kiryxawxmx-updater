@@ -28,13 +28,6 @@ autoUpdater.on("update-available", (info) => {
 autoUpdater.on("update-not-available", () => {
   console.log("Обновлений нет");
   sendToRenderer("update-not-available");
-
-  dialog.showMessageBox({
-    type: "info",
-    title: "Обновлений нет",
-    message: "У вас установлена последняя версия программы.",
-    buttons: ["OK"],
-  });
 });
 
 autoUpdater.on("download-progress", (progressObj) => {
@@ -49,20 +42,13 @@ autoUpdater.on("update-downloaded", (info) => {
 autoUpdater.on("error", (err) => {
   console.error("Ошибка обновления:", err);
   sendToRenderer("update-error", err.message);
-
-  dialog.showErrorBox(
-    "Ошибка обновления",
-    `Не удалось проверить обновления: ${err.message}`,
-  );
 });
 
-// IPC для запуска загрузки
 ipcMain.handle("start-download", () => {
   autoUpdater.downloadUpdate();
   return "Загрузка начата";
 });
 
-// IPC для установки
 ipcMain.handle("install-update", () => {
   autoUpdater.quitAndInstall();
   return "Установка...";
