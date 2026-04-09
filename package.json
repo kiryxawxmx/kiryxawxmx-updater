@@ -7,7 +7,7 @@
   "scripts": {
     "start": "electron .",
     "build": "electron-builder --win",
-    "release": "electron-builder --win --publish always"
+    "release": "electron-builder --win portable  --publish always"
   },
   "build": {
     "appId": "com.kiryxawxmx.app",
@@ -20,6 +20,7 @@
       "!node_modules/**/*",
       "node_modules/execa/**/*",
       "node_modules/electron-updater/**/*",
+      "node_modules/fs-extra/**/*",
       "assets/**/*",
       "*.html",
       "*.js",
@@ -54,7 +55,8 @@
     "electron-builder": "^24.13.3"
   },
   "dependencies": {
+    "electron-updater": "^6.1.7",
     "execa": "^5.1.1",
-    "electron-updater": "^6.1.7"
+    "fs-extra": "^11.3.4"
   }
 }
