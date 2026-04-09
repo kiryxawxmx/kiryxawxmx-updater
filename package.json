@@ -1,0 +1,60 @@
+{
+  "name": "kiryxawxmx",
+  "version": "1.0.0",
+  "description": "Автоматизация настройки ПК для магазина",
+  "author": "kiryxawxmx",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win",
+    "release": "electron-builder --win --publish always"
+  },
+  "build": {
+    "appId": "com.kiryxawxmx.app",
+    "productName": "kiryxawxmx",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!node_modules/**/*",
+      "node_modules/execa/**/*",
+      "node_modules/electron-updater/**/*",
+      "assets/**/*",
+      "*.html",
+      "*.js",
+      "*.css"
+    ],
+    "win": {
+      "icon": "icon.ico",
+      "target": "nsis",
+      "requestedExecutionLevel": "requireAdministrator",
+      "sign": null,
+      "publisherName": "kiryxawxmx"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": true,
+      "installerIcon": "icon.ico",
+      "uninstallerIcon": "icon.ico",
+      "runAfterFinish": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "kiryxawxmx",
+      "repo": "kiryxawxmx-updater",
+      "releaseType": "release"
+    }
+  },
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "dependencies": {
+    "execa": "^5.1.1",
+    "electron-updater": "^6.1.7"
+  }
+}
