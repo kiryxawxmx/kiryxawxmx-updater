@@ -1,19 +1,7 @@
 const { autoUpdater } = require("electron-updater");
 const { dialog, BrowserWindow, ipcMain, app } = require("electron");
-const path = require("path");
 
-// Простая проверка - разработка или продакшн
 const isDev = !app.isPackaged;
-
-// Настройка для разработки
-if (isDev) {
-  const devUpdatePath = path.join(__dirname, "dev-app-update.yml");
-  try {
-    autoUpdater.updateConfigPath = devUpdatePath;
-  } catch (e) {
-    console.log("Dev config not found, skipping...");
-  }
-}
 
 autoUpdater.autoDownload = false;
 autoUpdater.autoInstallOnAppQuit = true;

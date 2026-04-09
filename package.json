@@ -15,6 +15,17 @@
     "directories": {
       "output": "dist"
     },
+    "files": [
+      "**/*",
+      "!node_modules/**/*",
+      "node_modules/execa/**/*",
+      "node_modules/electron-updater/**/*",
+      "assets/**/*",
+      "*.html",
+      "*.js",
+      "*.css",
+      "*.yml"
+    ],
     "win": {
       "icon": "icon.ico",
       "target": "nsis",
