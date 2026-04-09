@@ -1,5 +1,12 @@
 const { autoUpdater } = require("electron-updater");
 const { dialog, BrowserWindow, ipcMain } = require("electron");
+const path = require("path");
+const isDev = require("electron-is-dev");
+
+// Настройка для разработки
+if (isDev) {
+  autoUpdater.updateConfigPath = path.join(__dirname, "dev-app-update.yml");
+}
 
 autoUpdater.autoDownload = false;
 autoUpdater.autoInstallOnAppQuit = true;
@@ -12,6 +19,16 @@ function sendToRenderer(channel, data) {
 }
 
 function checkForUpdates() {
+  if (isDev) {
+    console.log("Режим разработки - обновления отключены");
+    dialog.showMessageBox({
+      type: "info",
+      title: "Режим разработки",
+      message: "Обновления работают только в собранном приложении.",
+      buttons: ["OK"],
+    });
+    return;
+  }
   autoUpdater.checkForUpdatesAndNotify();
 }
 
