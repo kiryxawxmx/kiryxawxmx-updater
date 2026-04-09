@@ -1,11 +1,18 @@
 const { autoUpdater } = require("electron-updater");
-const { dialog, BrowserWindow, ipcMain } = require("electron");
+const { dialog, BrowserWindow, ipcMain, app } = require("electron");
 const path = require("path");
-const isDev = require("electron-is-dev");
+
+// Простая проверка - разработка или продакшн
+const isDev = !app.isPackaged;
 
 // Настройка для разработки
 if (isDev) {
-  autoUpdater.updateConfigPath = path.join(__dirname, "dev-app-update.yml");
+  const devUpdatePath = path.join(__dirname, "dev-app-update.yml");
+  try {
+    autoUpdater.updateConfigPath = devUpdatePath;
+  } catch (e) {
+    console.log("Dev config not found, skipping...");
+  }
 }
 
 autoUpdater.autoDownload = false;
@@ -21,12 +28,6 @@ function sendToRenderer(channel, data) {
 function checkForUpdates() {
   if (isDev) {
     console.log("Режим разработки - обновления отключены");
-    dialog.showMessageBox({
-      type: "info",
-      title: "Режим разработки",
-      message: "Обновления работают только в собранном приложении.",
-      buttons: ["OK"],
-    });
     return;
   }
   autoUpdater.checkForUpdatesAndNotify();
