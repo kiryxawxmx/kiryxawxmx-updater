@@ -14,6 +14,7 @@
     "directories": {
       "output": "release"
     },
+    "asar": true,
     "files": [
       "**/*",
       "!node_modules/**/*",
@@ -21,6 +22,8 @@
       "node_modules/electron-updater/**/*",
       "node_modules/fs-extra/**/*",
       "node_modules/universalify/**/*",
+      "node_modules/graceful-fs/**/*",
+      "node_modules/jsonfile/**/*",
       "assets/**/*",
       "*.html",
       "*.js",
@@ -46,9 +49,11 @@
     "electron-builder": "^24.13.3"
   },
   "dependencies": {
-    "execa": "^5.1.1",
     "electron-updater": "^6.1.7",
+    "execa": "^5.1.1",
     "fs-extra": "^11.2.0",
+    "graceful-fs": "^4.2.11",
+    "jsonfile": "^6.2.0",
     "universalify": "^2.0.1"
   }
 }
