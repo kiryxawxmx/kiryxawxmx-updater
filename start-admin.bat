@@ -1,3 +1,0 @@
-@echo off
-echo Запуск PC Setup Tool с правами администратора...
-powershell -Command "Start-Process npm -ArgumentList 'start' -Verb RunAs -WorkingDirectory '%CD%'"
